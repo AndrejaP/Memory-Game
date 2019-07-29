@@ -1,0 +1,175 @@
+/*adding resetting to all items. Box-sizing does not apply to margin*/
+* {
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+}
+
+/*vh = 1% viewport height*/
+body {
+	/*height: 100vh;*/
+	height: 100%;
+	background: #333;
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-size: 26px;
+	color: #5871a7; /*color converter plus color mixer after it*/
+	/*display: flex; /*display flex to the parent and margin auto to the child centers the child horizonally and vertically*/
+}
+
+.flex-container {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;/*this was commented out and the modal was displaying to the right*/
+	align-items: center;
+	/*margin: auto;*/
+
+}
+
+header {
+	/*display: flex;
+	flex-direction: column;
+	
+	justify-content: center;*/
+	text-shadow: 6px 6px 3px #111;
+	text-align: center;
+}
+
+aside {
+	/*display: flex;
+	flex-direction: column;
+	
+	justify-content: center;*/
+	text-shadow: 6px 6px 3px #111;
+	text-align: center;
+}
+
+.restart {
+	margin-top: 15px;
+}
+
+.memory-game {
+	width: 550px;
+	height: 550px;
+	/*margin: auto; this plus display flex on the parent, centers the element both horiz. and vert. */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	perspective: 1000px; /*gives depth to the elements*/
+	/*margin: 0 50px;*/
+}
+
+.memory-card {
+	width: calc(25% - 14px);
+	height: calc(25% - 14px);
+	cursor: pointer;
+	margin: 7px;/*margin breaks the layout because its more than 25% for each so we use calc*/
+	position: relative;/*element with the position absolute, positions itself relative to the nearest relatively positioned ancestor*/
+    transform: scale(1); /*we need a starting place for the transition to work.hm Not sure about that*/
+    transform-style: preserve-3d; /*that is gonna insert our cards into the 3d space we created in memory-game container*/
+    transition: transform .6s;
+}
+
+	
+.memory-card:active {
+	transform: scale(.97);
+	/*transition: tranform 1s;*/
+	transition: all 0.6s; /*all is a trick I discovered when making the portfolio*/
+}
+
+.memory-card.flip { /*no spaces because the two classes belong to the same element*/
+	transform: rotateY(180deg);
+}
+
+.front,
+.back {
+	width: 100%; /*imgs take up the entire width and height of the cards-its containers*/
+	height: 100%;
+	position: absolute;
+	backface-visibility: hidden;/*every HTML element has a backface which is a mirrored image of itself*/
+}
+
+.front {
+	  transform: rotateY(180deg);
+	/*backface-visibility: visible; this shows the paintings but with shadow to the left*/
+}
+
+.memory-card img {
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px black;
+}
+
+.stars {
+	display: inline-block;
+	padding-right: 1em;
+	font-size: 0.6em;
+}
+
+li {
+	list-style: none;
+	display: inline-block;
+}
+
+.restart {
+	cursor: pointer;
+}
+
+/* Styles for the congratulations modal*/
+.modal-container {
+	width: 100%; /*it covers the entire background*/
+	height: 100%;
+	/*opacity: 0.7; the child, the modal, would inherit this opacity*/
+	background-color: rgba(0, 0, 0, 0.8); /*the children elements dont inherit the opacity if we put it like this.*/
+	position: absolute;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+}
+
+.modal {
+	width: 500px;
+	height: 440px;
+	color: cornflowerblue;
+	font-size: 24px;
+	background-color: #555;
+	border: 10px solid palegreen;
+	border-radius: 30px;
+	text-align: center;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.modal img {
+	filter: drop-shadow(6px 6px 4px #222);
+	width: 130px;
+}
+
+button {
+	border-radius: 8px;
+	background-color: palegreen;
+	color: #0000e6;
+	font: inherit;
+	cursor: pointer;
+	padding: 3px;
+}
+
+span {
+	display: inline-block;
+	min-width: 1.1em;
+	text-align: right;
+}
+
+/* Styles for small screens*/
+@media screen and (mix-width: 700px) {
+	.flex-container	{
+		display: flex;
+		flex-direction: row;
+	}
+}

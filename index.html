@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Memory Game 2</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+	<div class="flex-container">
+		<header>
+			<h2>Memory</h2>
+			<h2>Game</h2>
+		</header>
+		<main class="memory-game">
+			<div class="memory-card" data-animal="chicken">
+				<img class="front" src="img/chick.jpg" alt="chicken"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="rooster">
+				<img class="front" src="img/cock.jpg" alt="rooster"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich">
+				<img class="front" src="img/frida.jpg" alt="ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="deer">
+				<img class="front" src="img/jelen.jpg" alt="deer"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich2">
+				<img class="front" src="img/ostrich.jpg" alt="ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich3">
+				<img class="front" src="img/oldy.jpg" alt="old ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich4">
+				<img class="front" src="img/pearl.jpg" alt="painted ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="sheep">
+				<img class="front" src="img/sheep.jpg" alt="sheep"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="chicken">
+				<img class="front" src="img/chick.jpg" alt="chicken"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="rooster">
+				<img class="front" src="img/cock.jpg" alt="rooster"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich">
+				<img class="front" src="img/frida.jpg" alt="ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="deer">
+				<img class="front" src="img/jelen.jpg" alt="deer"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich2">
+				<img class="front" src="img/ostrich.jpg" alt="ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich3">
+				<img class="front" src="img/oldy.jpg" alt="old ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="ostrich4">
+				<img class="front" src="img/pearl.jpg" alt="painted ostrich"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+			<div class="memory-card" data-animal="sheep">
+				<img class="front" src="img/sheep.jpg" alt="sheep"/>
+				<img class="back" src="img/back.jpg" alt="skull"/>
+			</div>
+		</main>
+		<aside class="scoreboard">
+				<h2>Moves:<span class="moves">0</span></h2>
+
+				<ul class="stars">
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+					<li><i class="fa fa-star"></i></li>
+				</ul>
+				
+				<div class="restart">
+					<i class="fas fa-redo"></i>
+				</div>
+		</aside>
+		<section class="modal-container">
+			<div class="modal">
+				<img src="img/baby.png" alt="baby ostrich"/>
+				<h1>Congratulations!</h1>
+				<p>Your star rating is: </p>
+				<ul class="star-rating"></ul>
+				<p class="timer"></p>
+				<p>It took you: <span class="time"></span> min</p>
+				<button>Play again</button>
+			</div>
+		</section>
+	</div>
+	<script src="js/app.js"></script>
+</body>
+</html>
