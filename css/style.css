@@ -24,29 +24,18 @@ body {
 	justify-content: center;/*this was commented out and the modal was displaying to the right*/
 	align-items: center;
 	/*margin: auto;*/
-
 }
 
 header {
-	/*display: flex;
-	flex-direction: column;
-	
-	justify-content: center;*/
 	text-shadow: 6px 6px 3px #111;
 	text-align: center;
 }
 
 aside {
-	/*display: flex;
-	flex-direction: column;
-	
-	justify-content: center;*/
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
 	text-shadow: 6px 6px 3px #111;
-	text-align: center;
-}
-
-.restart {
-	margin-top: 15px;
 }
 
 .memory-game {
@@ -58,7 +47,6 @@ aside {
 	justify-content: space-between;
 	align-items: center;
 	perspective: 1000px; /*gives depth to the elements*/
-	/*margin: 0 50px;*/
 }
 
 .memory-card {
@@ -71,7 +59,6 @@ aside {
     transform-style: preserve-3d; /*that is gonna insert our cards into the 3d space we created in memory-game container*/
     transition: transform .6s;
 }
-
 	
 .memory-card:active {
 	transform: scale(.97);
@@ -104,7 +91,7 @@ aside {
 .stars {
 	display: inline-block;
 	padding-right: 1em;
-	font-size: 0.6em;
+	font-size: 0.5em;
 }
 
 li {
@@ -112,8 +99,22 @@ li {
 	display: inline-block;
 }
 
+.timer {
+	min-width: 2.5em;//alelujaaaaaaaaaNope
+}
+
+#timer {
+	margin: 0 30px;
+}
+
+.moves {
+	min-width: 1.1em;
+	text-align: right;
+}
+
 .restart {
 	cursor: pointer;
+	font-size: 0.7em;
 }
 
 /* Styles for the congratulations modal*/
@@ -157,19 +158,19 @@ button {
 	color: #0000e6;
 	font: inherit;
 	cursor: pointer;
-	padding: 3px;
+	padding: 2px;
+	outline-style: hidden; //?
 }
 
 span {
 	display: inline-block;
-	min-width: 1.1em;
-	text-align: right;
 }
 
-/* Styles for small screens*/
-@media screen and (mix-width: 700px) {
-	.flex-container	{
-		display: flex;
-		flex-direction: row;
+
+
+Styles for small screens
+@media screen and (max-width: 700px) {
+	.memory-board {
+		min-width: 300px;
 	}
 }
