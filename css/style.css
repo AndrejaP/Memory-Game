@@ -102,7 +102,7 @@ li {
 }
 
 .timer {
-	min-width: 2.5em;//alelujaaaaaaaaaNope
+	min-width: 2.5em;
 }
 
 #timer {
@@ -125,10 +125,9 @@ li {
 	width: 100%; /*it covers the entire background*/
 	height: 100%;
 	/*opacity: 0.7; the child, the modal, would inherit this opacity*/
-	background-color: rgba(0, 0, 0, 0.8); /*the children elements dont inherit the opacity if we put it like this.*/
+	background-color: rgba(0, 0, 0, 0.6); /*the children elements dont inherit the opacity if we put it like this.*/
 	position: absolute;
 	top: 0;
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	display: none;
@@ -205,5 +204,11 @@ span {
 	.memory-game {
 		width: 340px;
 		height: 340px;
+	}
+}
+
+@media screen and (orientation: landscape) {
+	.modal {
+		max-height: 100vh;
 	}
 }

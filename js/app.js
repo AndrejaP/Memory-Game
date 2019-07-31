@@ -11,6 +11,7 @@ var timer = document.querySelector(".timer");
 var interval;
 
 function flip(currentCard) {
+	if(!currentCard.classList || !currentCard.classList.contains("memory-card")) return; //if sb clicks beside the card
 	if(lockBoard) return; //return from the function-leave the function-if lockBoard is true
 	if(currentCard === firstCard) return;//if it is the second card click than THIS variable-currentCard- holds the 2nd card 
 	if(currentCard.dataset.matched == true) return;//MUST THIS ONE BE ABOVE THE ONE BELOW TO RETURN BEFORE IT FLIPS`?
@@ -119,7 +120,8 @@ document.querySelector('.memory-game').addEventListener('click', function(event)
 
 function displayModal() {
 	if (pairsFound === 8) { //I can add below: if pairsFound < 8 return but I dont have to, I can put it in one line if <i dont have curly breakckets
-		
+		if (interval) clearInterval(interval);
+		interval = null;
 		document.querySelector('.time').innerText = duration();
 		const starsContainer = document.querySelector('.stars');
 		document.querySelector('.star-rating').innerHTML = starsContainer.innerHTML;
@@ -137,7 +139,8 @@ function startTimer() {
 
 function resetTimer() {
 	startGame = true;
-	clearInterval(interval);
+	if (interval) clearInterval(interval);
+	interval = null;
 	timer.innerText = '00:00';
 }
 
