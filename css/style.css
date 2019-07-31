@@ -1,19 +1,17 @@
 /*adding resetting to all items. Box-sizing does not apply to margin*/
 * {
-	padding:0;
-	margin:0;
+	padding: 0;
+	margin: 0;
 	box-sizing: border-box;
 }
 
 /*vh = 1% viewport height*/
 body {
-	/*height: 100vh;*/
 	height: 100%;
 	background: #333;
 	font-family: 'Love Ya Like A Sister', cursive;
 	font-size: 26px;
-	color: #5871a7; /*color converter plus color mixer after it*/
-	/*display: flex; /*display flex to the parent and margin auto to the child centers the child horizonally and vertically*/
+	color: #5871a7; 
 }
 
 .flex-container {
@@ -23,7 +21,6 @@ body {
 	flex-direction: column;
 	justify-content: center;/*this was commented out and the modal was displaying to the right*/
 	align-items: center;
-	/*margin: auto;*/
 }
 
 header {
@@ -34,19 +31,20 @@ header {
 aside {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	
 	text-shadow: 6px 6px 3px #111;
 }
 
 .memory-game {
-	width: 550px;
-	height: 550px;
+	width: 530px;
+	height: 530px;
 	/*margin: auto; this plus display flex on the parent, centers the element both horiz. and vert. */
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	perspective: 1000px; /*gives depth to the elements*/
+	margin: 0.3em 0;
 }
 
 .memory-card {
@@ -88,9 +86,13 @@ aside {
 	box-shadow: 5px 5px 5px black;
 }
 
+/*.memory-card.disable {
+	pointer-events: none;
+}*/
+
 .stars {
 	display: inline-block;
-	padding-right: 1em;
+	padding: 0.7em 1em 0 0;
 	font-size: 0.5em;
 }
 
@@ -115,6 +117,7 @@ li {
 .restart {
 	cursor: pointer;
 	font-size: 0.7em;
+	padding-top: 0.3em;
 }
 
 /* Styles for the congratulations modal*/
@@ -166,11 +169,41 @@ span {
 	display: inline-block;
 }
 
+/*https://css-tricks.com/snippets/css/shake-css-keyframe-animation/:*/
+.animation {
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  	transform: translate3d(0, 0, 0);
+  	backface-visibility: visible;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 
 
-Styles for small screens
-@media screen and (max-width: 700px) {
-	.memory-board {
-		min-width: 300px;
+
+/*Styles for small screens*/
+@media screen and (max-width: 600px) { 
+	
+	body {
+		font-size: 20px;
+	}
+	.memory-game {
+		width: 340px;
+		height: 340px;
 	}
 }

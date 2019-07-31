@@ -5,7 +5,8 @@ let flippedCard = false;
 //if it's not a match, I have to lock the board and wait until it finishes unflipping:
 let lockBoard = false; 
 let firstCard, secondCard;
-let startTime = performance.now();
+let startGame = true;
+let startTime;
 var timer = document.querySelector(".timer");
 var interval;
 
@@ -13,12 +14,18 @@ function flip(currentCard) {
 	if(lockBoard) return; //return from the function-leave the function-if lockBoard is true
 	if(currentCard === firstCard) return;//if it is the second card click than THIS variable-currentCard- holds the 2nd card 
 	if(currentCard.dataset.matched == true) return;//MUST THIS ONE BE ABOVE THE ONE BELOW TO RETURN BEFORE IT FLIPS`?
+	if(startGame) {
+		startGame = false;
+		startTimer();
+	}
 	currentCard.classList.add('flip');
 	
 	if(!flippedCard) {
 		//first click
+		//currentCard.classList.add("disable"); !!!!!!!!???not to cbe able to click twice on it
 		flippedCard = true;
 		firstCard = currentCard;
+		
 	} else {
 		//second click
 		secondCard = currentCard;
@@ -32,19 +39,32 @@ function flip(currentCard) {
 function matchingLogic() {
 	if(firstCard.dataset.animal === secondCard.dataset.animal) {
 		//the cards match
+
 		resetBoard();
 		pairsFound++;
 		displayModal();
 
 		/*firstCard.dataset.matched = true;
-		secondCard.dataset.matched = true;
-		/*animateCards(); to move left right when its not a match*/
+		secondCard.dataset.matched = true;*/
+	
 		
 	} else {
 		//the cards do not match
+	    animateCards(); //to move left right when its not a match 
 		unflipCards();
 	}
 }
+
+function animateCards() {
+	if(firstCard) firstCard.firstElementChild.classList.add("animation");
+	if(secondCard) secondCard.firstElementChild.classList.add("animation");
+}
+
+function unanimateCards() {
+	if(firstCard) firstCard.firstElementChild.classList.remove("animation");
+	if(secondCard) secondCard.firstElementChild.classList.remove("animation");
+}
+
 
 //if it's not a match the cards flip back to the starting position:
 function unflipCards() { 
@@ -58,6 +78,7 @@ function unflipCards() {
 //for our condition to work we have to, after each round, set 1st and 2nd card to null
 //ES6 destructuring assignment makes it short and sweet:
 function resetBoard() {
+	unanimateCards();
 	[flippedCard, lockBoard] = [false, false];
 	[firstCard, secondCard] = [null, null];
 }
@@ -71,12 +92,11 @@ function resetGame() {
 		star.classList.add('fa');
 		star.classList.remove('far');
 	});
+	resetTimer();
 	shuffle();
 	document.querySelector('.modal-container').style.display = 'none';
 }
-/*animateCards {
-	document.querySelectorAll('.memory-card').style.animate = 
-}*/
+
 
 /*shuffling the cards with the flexbox property ORDER-it is a flex items property which defaults to 0
 -every flex item belongs to the same group and then they will be grouped by source order.
@@ -87,9 +107,7 @@ function shuffle() {
 		let randomPos = Math.floor(Math.random() * 16);//generating a random number between 0 and one
 		card.classList.remove('flip');//we added this to flip the cards back to skulls at the end.
 		card.style.order = randomPos;//and assigning it to each card
-
 	});
-	startTimer();
 }
 
 document.querySelector('.memory-game').addEventListener('click', function(event) {
@@ -106,19 +124,21 @@ function displayModal() {
 		const starsContainer = document.querySelector('.stars');
 		document.querySelector('.star-rating').innerHTML = starsContainer.innerHTML;
 		document.querySelector('.modal-container').style.display = 'flex';
-		resetTimer();
 	}
 }
 
 //the timer:
 function startTimer() {
+	startTime = performance.now();
 	interval = setInterval(function() {
-		timer.innerHTML = duration();
+		timer.innerText = duration();
 	}, 1000);
 }
 
 function resetTimer() {
+	startGame = true;
 	clearInterval(interval);
+	timer.innerText = '00:00';
 }
 
 //TODO look for tabs and spaces and check indents
