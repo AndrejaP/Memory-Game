@@ -5,114 +5,132 @@
 	box-sizing: border-box;
 }
 
-/*vh = 1% viewport height*/
+
 body {
-	height: 100%;
 	background: #333;
 	font-family: 'Love Ya Like A Sister', cursive;
 	font-size: 26px;
-	color: #5871a7; 
+	color: #5871a7;
+	overflow: hidden;
+	text-shadow: 6px 6px 3px #111;
 }
 
-.flex-container {
+
+.grid-container {
 	height: 100vh;
 	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;/*this was commented out and the modal was displaying to the right*/
-	align-items: center;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: auto 100vw auto;
+	grid-template-areas: 
+		"header"
+		"main"
+		"aside";
+	grid-gap: 0 10px;
+	justify-content: center;
+	align-content: center;
+	align-items: stretch;
 }
 
+
 header {
-	text-shadow: 6px 6px 3px #111;
+	grid-area: header;
+	align-self: end;
+	justify-self: center;
 	text-align: center;
 }
 
-aside {
-	display: flex;
-	justify-content: space-between;
-	
-	text-shadow: 6px 6px 3px #111;
-}
 
-.memory-game {
-	width: 530px;
-	height: 530px;
-	/*margin: auto; this plus display flex on the parent, centers the element both horiz. and vert. */
+aside {
+	grid-area: aside;
+	align-self: start;
+	justify-self: stretch;
 	display: flex;
-	flex-wrap: wrap;
+	flex-flow: row wrap;
 	justify-content: space-between;
 	align-items: center;
-	perspective: 1000px; /*gives depth to the elements*/
-	margin: 0.3em 0;
+	line-height: 36px;
+	padding: 0 10px;
+	white-space: nowrap;
 }
 
-.memory-card {
-	width: calc(25% - 14px);
-	height: calc(25% - 14px);
-	cursor: pointer;
-	margin: 7px;/*margin breaks the layout because its more than 25% for each so we use calc*/
-	position: relative;/*element with the position absolute, positions itself relative to the nearest relatively positioned ancestor*/
-    transform: scale(1); /*we need a starting place for the transition to work.hm Not sure about that*/
-    transform-style: preserve-3d; /*that is gonna insert our cards into the 3d space we created in memory-game container*/
-    transition: transform .6s;
+
+main {
+	grid-area: main;
+	padding: 10px;
 }
-	
+
+
+.memory-game {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-gap: 10px;
+	justify-items: stretch;
+	align-items: stretch;
+	perspective: 1000px; /*gives depth to the elements*/
+}
+
+
+.memory-card {
+	cursor: pointer;
+	transform: scale(1); /*we need a starting place for the transition to work.hm Not sure about that*/
+	transform-style: preserve-3d; /*that is gonna insert our cards into the 3d space we created in memory-game container*/
+	transition: transform 0.6s;
+}
+
+
 .memory-card:active {
 	transform: scale(.97);
-	/*transition: tranform 1s;*/
+	/*transition: transform 1s;*/
 	transition: all 0.6s; /*all is a trick I discovered when making the portfolio*/
 }
+
 
 .memory-card.flip { /*no spaces because the two classes belong to the same element*/
 	transform: rotateY(180deg);
 }
 
+
 .front,
 .back {
-	width: 100%; /*imgs take up the entire width and height of the cards-its containers*/
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px black;
+	width: 100%;
 	height: 100%;
 	position: absolute;
 	backface-visibility: hidden;/*every HTML element has a backface which is a mirrored image of itself*/
 }
 
+
 .front {
-	  transform: rotateY(180deg);
+	transform: rotateY(180deg);
 	/*backface-visibility: visible; this shows the paintings but with shadow to the left*/
 }
 
-.memory-card img {
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px black;
-}
-
-/*.memory-card.disable {
-	pointer-events: none;
-}*/
 
 .stars {
 	display: inline-block;
-	padding: 0.7em 1em 0 0;
 	font-size: 0.5em;
 }
+
 
 li {
 	list-style: none;
 	display: inline-block;
 }
 
+
 .timer {
 	min-width: 2.5em;
 }
 
-#timer {
-	margin: 0 30px;
-}
 
 .moves {
 	min-width: 1.1em;
 	text-align: right;
 }
+
 
 .restart {
 	cursor: pointer;
@@ -120,18 +138,20 @@ li {
 	padding-top: 0.3em;
 }
 
+
 /* Styles for the congratulations modal*/
 .modal-container {
 	width: 100%; /*it covers the entire background*/
 	height: 100%;
-	/*opacity: 0.7; the child, the modal, would inherit this opacity*/
+	/*opacity: 0.6; the child, the modal, would inherit this opacity*/
 	background-color: rgba(0, 0, 0, 0.6); /*the children elements dont inherit the opacity if we put it like this.*/
 	position: absolute;
 	top: 0;
+	display: none; /* will be modified to flex via js */
 	justify-content: center;
 	align-items: center;
-	display: none;
 }
+
 
 .modal {
 	width: 500px;
@@ -149,10 +169,12 @@ li {
 	align-items: center;
 }
 
+
 .modal img {
 	filter: drop-shadow(6px 6px 4px #222);
 	width: 130px;
 }
+
 
 button {
 	border-radius: 8px;
@@ -161,54 +183,86 @@ button {
 	font: inherit;
 	cursor: pointer;
 	padding: 2px;
-	outline-style: hidden; //?
+	outline-style: hidden;
 }
+
 
 span {
 	display: inline-block;
 }
 
+
 /*https://css-tricks.com/snippets/css/shake-css-keyframe-animation/:*/
 .animation {
 	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  	transform: translate3d(0, 0, 0);
-  	backface-visibility: visible;
+	transform: rotateY(180deg) translate3d(0, 0, 0);
+	backface-visibility: inherit;
 }
+
 
 @keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
+	10%, 90% {
+		transform: rotateY(180deg) translate3d(-1px, 0, 0);
+	}
 
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
+	20%, 80% {
+		transform: rotateY(180deg) translate3d(2px, 0, 0);
+	}
 
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
+	30%, 50%, 70% {
+		transform: rotateY(180deg) translate3d(-4px, 0, 0);
+	}
+
+	40%, 60% {
+		transform: rotateY(180deg) translate3d(4px, 0, 0);
+	}
 }
 
 
-
-/*Styles for small screens*/
-@media screen and (max-width: 600px) { 
+@media screen and (min-aspect-ratio: 17/20) {
 	
-	body {
-		font-size: 20px;
-	}
-	.memory-game {
-		width: 340px;
-		height: 340px;
+	.grid-container {
+		grid-template-columns: calc(100vh - 100px);
+		grid-template-rows: 50px calc(100vh - 100px) 50px;
 	}
 }
+
 
 @media screen and (orientation: landscape) {
+	
 	.modal {
 		max-height: 100vh;
+	}
+}
+
+
+@media screen and (min-aspect-ratio: 4/3) {
+	
+	.grid-container {
+		grid-template-columns: 100vh 150px;
+		grid-template-rows: 50% 50%;
+		grid-template-areas: 
+			"main header"
+			"main aside";
+		grid-gap: 0;
+	}
+	
+	
+	aside {
+		justify-self: center;
+		flex-direction: column;
+		justify-content: flex-start;
+		padding: 0;
+	}
+}
+
+@media screen and (min-aspect-ratio: 4/3) and (min-height: 600px) {
+	
+	main {
+		padding: 20px;
+	}
+
+	.memory-game {
+		grid-gap: 20px;
 	}
 }
