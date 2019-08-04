@@ -1,20 +1,16 @@
-/*adding resetting to all items. Box-sizing does not apply to margin*/
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
 }
 
-
 body {
 	background: #333;
-	font-family: 'Love Ya Like A Sister', cursive;
-	font-size: 26px;
+	font: 26px "Love Ya Like A Sister", cursive;
 	color: #5871a7;
 	overflow: hidden;
 	text-shadow: 6px 6px 3px #111;
 }
-
 
 .grid-container {
 	height: 100vh;
@@ -32,7 +28,7 @@ body {
 	align-items: stretch;
 }
 
-
+/*title*/
 header {
 	grid-area: header;
 	align-self: end;
@@ -40,7 +36,7 @@ header {
 	text-align: center;
 }
 
-
+/*scoreboard*/
 aside {
 	grid-area: aside;
 	align-self: start;
@@ -54,12 +50,11 @@ aside {
 	white-space: nowrap;
 }
 
-
+/*main content*/
 main {
 	grid-area: main;
 	padding: 10px;
 }
-
 
 .memory-game {
 	display: grid;
@@ -68,69 +63,59 @@ main {
 	grid-gap: 10px;
 	justify-items: stretch;
 	align-items: stretch;
-	perspective: 1000px; /*gives depth to the elements*/
+	/*gives depth to the elements*/
+	perspective: 1000px;
 }
-
 
 .memory-card {
 	cursor: pointer;
-	transform: scale(1); /*we need a starting place for the transition to work.hm Not sure about that*/
-	transform-style: preserve-3d; /*that is gonna insert our cards into the 3d space we created in memory-game container*/
+	transform: scale(1); 
+	/*3d will insert the cards into the 3d space we created in memory-game container*/
+	transform-style: preserve-3d;
 	transition: transform 0.6s;
 }
 
-
 .memory-card:active {
 	transform: scale(.97);
-	/*transition: transform 1s;*/
-	transition: all 0.6s; /*all is a trick I discovered when making the portfolio*/
+	transition: all 0.6s;
 }
 
-
-.memory-card.flip { /*no spaces because the two classes belong to the same element*/
+.flip {
 	transform: rotateY(180deg);
 }
-
 
 .front,
 .back {
 	border-radius: 10px;
-	box-shadow: 5px 5px 5px black;
+	box-shadow: 5px 5px 5px #000;
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	backface-visibility: hidden;/*every HTML element has a backface which is a mirrored image of itself*/
+	backface-visibility: hidden;
 }
-
 
 .front {
 	transform: rotateY(180deg);
-	/*backface-visibility: visible; this shows the paintings but with shadow to the left*/
 }
-
 
 .stars {
 	display: inline-block;
 	font-size: 0.5em;
 }
 
-
 li {
 	list-style: none;
 	display: inline-block;
 }
 
-
 .timer {
 	min-width: 2.5em;
 }
-
 
 .moves {
 	min-width: 1.1em;
 	text-align: right;
 }
-
 
 .restart {
 	cursor: pointer;
@@ -138,28 +123,27 @@ li {
 	padding-top: 0.3em;
 }
 
-
 /* Styles for the congratulations modal*/
 .modal-container {
-	width: 100%; /*it covers the entire background*/
+	width: 100%;
 	height: 100%;
-	/*opacity: 0.6; the child, the modal, would inherit this opacity*/
-	background-color: rgba(0, 0, 0, 0.6); /*the children elements dont inherit the opacity if we put it like this.*/
+	/*the children elements dont inherit the opacity if we write it within rgba*/
+	background-color: rgba(0, 0, 0, 0.6); 
 	position: absolute;
 	top: 0;
-	display: none; /* will be modified to flex via js */
+	/* display will be modified to flex via js when the game is over*/
+	display: none;
 	justify-content: center;
 	align-items: center;
 }
 
-
 .modal {
 	width: 500px;
 	height: 440px;
-	color: cornflowerblue;
+	color: #6495ed;
 	font-size: 24px;
 	background-color: #555;
-	border: 10px solid palegreen;
+	border: 10px solid #98fb98;
 	border-radius: 30px;
 	text-align: center;
 	padding: 20px;
@@ -169,7 +153,6 @@ li {
 	align-items: center;
 }
 
-
 .modal img {
 	filter: drop-shadow(6px 6px 4px #222);
 	width: 130px;
@@ -178,7 +161,7 @@ li {
 
 button {
 	border-radius: 8px;
-	background-color: palegreen;
+	background-color: #98fb98;
 	color: #0000e6;
 	font: inherit;
 	cursor: pointer;
@@ -186,19 +169,16 @@ button {
 	outline: none;
 }
 
-
 span {
 	display: inline-block;
 }
 
-
-/*https://css-tricks.com/snippets/css/shake-css-keyframe-animation/:*/
+/*https://css-tricks.com/snippets/css/shake-css-keyframe-animation*/
 .animation {
 	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
 	transform: rotateY(180deg) translate3d(0, 0, 0);
 	backface-visibility: inherit;
 }
-
 
 @keyframes shake {
 	10%, 90% {
@@ -218,7 +198,7 @@ span {
 	}
 }
 
-
+/*adjustment of the game layout to landscape and portrait orientations*/
 @media screen and (min-aspect-ratio: 17/20) {
 	
 	.grid-container {
@@ -227,14 +207,12 @@ span {
 	}
 }
 
-
 @media screen and (orientation: landscape) {
 	
 	.modal {
 		max-height: 100vh;
 	}
 }
-
 
 @media screen and (min-aspect-ratio: 4/3) {
 	
@@ -247,7 +225,6 @@ span {
 		grid-gap: 0;
 	}
 	
-	
 	aside {
 		justify-self: center;
 		flex-direction: column;
@@ -256,6 +233,7 @@ span {
 	}
 }
 
+/*adjustment for big screens*/
 @media screen and (min-aspect-ratio: 4/3) and (min-height: 600px) {
 	
 	main {
