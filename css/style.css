@@ -183,7 +183,7 @@ button {
 	font: inherit;
 	cursor: pointer;
 	padding: 2px;
-	outline-style: hidden;
+	outline: none;
 }
 
 
