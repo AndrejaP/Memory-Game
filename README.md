@@ -7,7 +7,6 @@ If they don't match they flip back. The object of the game is to find 8 pairs of
 in as few moves and as little time as possible.
 
 
-
 ## Installation
 
 Clone the repo or download and unzip the zip file in any folder and open the index.html file in your browser.
@@ -21,4 +20,4 @@ Clone the repo or download and unzip the zip file in any folder and open the ind
 
 ## License
 
-The content of this repository is licensed under an [MIT licence](https://choosealicense.com/licenses/mit/)
+The content of this repository is licensed under an [MIT license](https://choosealicense.com/licenses/mit/)
