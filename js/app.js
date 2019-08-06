@@ -1,3 +1,4 @@
+"use strict";
 const cards = document.querySelectorAll('.memory-card');
 const movesElem = document.querySelector('.moves');
 const modalWindow = document.querySelector('.modal-container');
