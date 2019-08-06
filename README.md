@@ -6,6 +6,7 @@ All of the cards are laid face down and two cards are clicked and flipped face u
 If they don't match they flip back. The object of the game is to find 8 pairs of matching cards 
 in as few moves and as little time as possible.
 
+<img src="img/screenshot.png" alt="Game screenshot">
 
 ## Installation
 
